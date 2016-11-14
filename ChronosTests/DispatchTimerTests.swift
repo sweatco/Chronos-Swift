@@ -35,7 +35,7 @@ class DispatchTimerTests : XCTestCase {
     
     // 5 second timeout for async tests
     var timeout: DispatchTime {
-      return DispatchTime(uptimeNanoseconds: DispatchTime.now().uptimeNanoseconds.advanced(by: Int(5 * NSEC_PER_SEC)))
+      return DispatchTime(uptimeNanoseconds: DispatchTime.now().uptimeNanoseconds.advanced(by: Int(truncatingBitPattern:5 * NSEC_PER_SEC)))
     }
     
     func testConvenienceInitializer() {
