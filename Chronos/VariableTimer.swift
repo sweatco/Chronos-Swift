@@ -169,7 +169,7 @@ open class VariableTimer : NSObject, RepeatingTimer {
     func schedule(_ now: Bool) {
         if isValid {
           let interval: Double = intervalProvider(self, count)
-          timer.scheduleRepeating(deadline: startTime(interval, now: now), interval: DispatchTimeInterval.nanoseconds(Int(interval.multiplied(by: Double(NSEC_PER_SEC)))))
+          timer.scheduleRepeating(deadline: startTime(interval, now: now), interval: DispatchTimeInterval.nanoseconds(Int(interval * Double(NSEC_PER_SEC))))
         }
     }
     

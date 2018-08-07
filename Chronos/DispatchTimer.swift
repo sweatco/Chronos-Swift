@@ -154,7 +154,7 @@ open class DispatchTimer : NSObject, RepeatingTimer {
     open func start(_ now: Bool) {
         validate()
         if OSAtomicCompareAndSwap32Barrier(State.paused, State.running, &running) {
-          timer.scheduleRepeating(deadline: startTime(interval, now: now), interval: DispatchTimeInterval.nanoseconds(Int(interval.multiplied(by: Double(NSEC_PER_SEC)))))
+          timer.scheduleRepeating(deadline: startTime(interval, now: now), interval: DispatchTimeInterval.nanoseconds(Int(interval * Double(NSEC_PER_SEC))))
             timer.resume()
         }
     }
