@@ -71,17 +71,17 @@ open class VariableTimer : NSObject, RepeatingTimer {
     /**
     The timer's execution queue.
     */
-    open let queue: DispatchQueue!
+    public let queue: DispatchQueue!
     
     /**
     The timer's execution closure.
     */
-    open let closure: ExecutionClosure!
+    public let closure: ExecutionClosure!
     
     /**
     The timer's interval closure.
     */
-    open let intervalProvider: IntervalClosure!
+    public let intervalProvider: IntervalClosure!
     
     /**
     The number of times the execution closure has been executed.
@@ -169,7 +169,7 @@ open class VariableTimer : NSObject, RepeatingTimer {
     func schedule(_ now: Bool) {
         if isValid {
           let interval: Double = intervalProvider(self, count)
-          timer.scheduleRepeating(deadline: startTime(interval, now: now), interval: DispatchTimeInterval.nanoseconds(Int(interval * Double(NSEC_PER_SEC))))
+            timer.schedule(deadline: startTime(interval, now: now), repeating: DispatchTimeInterval.nanoseconds(Int(interval * Double(NSEC_PER_SEC))))
         }
     }
     
@@ -185,7 +185,7 @@ open class VariableTimer : NSObject, RepeatingTimer {
         if OSAtomicCompareAndSwap32Barrier(State.paused, State.running, &running) {
             if now {
               self.shouldFireImmediately = true
-              timer.scheduleOneshot(deadline: DispatchTime.now())
+                timer.schedule(deadline: DispatchTime.now(), repeating: DispatchTimeInterval.never)
             } else if !isExecuting {
                 schedule(now)
             }

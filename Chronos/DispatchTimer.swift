@@ -62,17 +62,17 @@ open class DispatchTimer : NSObject, RepeatingTimer {
     /**
     The timer's execution queue.
     */
-    open let queue: DispatchQueue!
+    public let queue: DispatchQueue!
     
     /**
     The timer's execution interval, in seconds.
     */
-    open let interval: Double!
+    public let interval: Double!
     
     /**
     The timer's execution closure.
     */
-    open let closure: ExecutionClosure!
+    public let closure: ExecutionClosure!
     
     /**
     The number of times the execution closure has been executed.
@@ -154,7 +154,7 @@ open class DispatchTimer : NSObject, RepeatingTimer {
     open func start(_ now: Bool) {
         validate()
         if OSAtomicCompareAndSwap32Barrier(State.paused, State.running, &running) {
-          timer.scheduleRepeating(deadline: startTime(interval, now: now), interval: DispatchTimeInterval.nanoseconds(Int(interval * Double(NSEC_PER_SEC))))
+            timer.schedule(deadline: startTime(interval, now: now), repeating: DispatchTimeInterval.nanoseconds(Int(interval * Double(NSEC_PER_SEC))))
             timer.resume()
         }
     }

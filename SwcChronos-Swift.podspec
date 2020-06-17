@@ -13,4 +13,5 @@ Pod::Spec.new do |s|
 	s.source_files  = "Chronos/*.swift"
 	s.requires_arc  = true
 	s.module_name	= "Chronos"
+    s.swift_version = "5.0"
 end
